@@ -37,7 +37,7 @@
                                         MenuSearchService.getMatchedMenuItems(dataArray.menu_items, list.searchTerm);
                                         list.items = MenuSearchService.getFoundItems();
                                         if (list.items.length === 0) {
-                                                list.message = 'Nothing Found!';
+                                                list.message = 'Nothing Found!';                                               
                                         }
                                 }).catch(function (error) {
                                         console.log("An error occured : ", error.message);
@@ -48,7 +48,10 @@
                 };
                 list.removeItem = function (index) {
                         MenuSearchService.removeItem(index);
-                        list.searchTerm = '';
+                        if (list.items.length === 0) {
+                                 list.searchTerm = '';
+                        }
+
                 };
 
         }
@@ -65,7 +68,6 @@
                 };
 
                 service.removeItem = function (index) {
-//                        console.log(foundItems[index]);
                         foundItems.splice(index, 1);
                 };
 
