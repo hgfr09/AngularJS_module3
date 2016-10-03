@@ -9,7 +9,7 @@
                 <td>{{item.short_name}}</td>  
                 <td>{{item.name}}</td>
                 <td>{{item.description}}</td>
-                <td><button ng-click="list.removeItem({index:$index})">Don't Want This One</button></td>
+                <td><button ng-click="removeItem({index:$index})">Don't Want This One</button></td>
         </tr>                                
 </table>
 <div class="clear text-danger" ng-if="list.items.length === 0">{{list.message}}</div>

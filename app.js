@@ -12,7 +12,7 @@
                         templateUrl: 'foundItems.html',
                         scope: {
                                 list: '<',
-                                onRemove: '&'
+                                removeItem: '&'
                         }
                 };
 
@@ -59,6 +59,7 @@
                 };
 
                 service.removeItem = function (index) {
+//                        console.log(foundItems[index]);
                         foundItems.splice(index, 1);
                 };
 
