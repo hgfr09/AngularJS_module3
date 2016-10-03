@@ -23,21 +23,27 @@
         NarrowItDownController.$inject = ['MenuSearchService'];
         function NarrowItDownController(MenuSearchService) {
                 var list = this;
-              
+
                 list.searchTerm = '';
                 list.items = [];
                 var promise = MenuSearchService.getPromise();
                 list.foundItems = function () {
-                        promise.then(function (response) {
-                                var dataArray = response.data;
-                                MenuSearchService.getMatchedMenuItems(dataArray.menu_items, list.searchTerm);
-                                list.items = MenuSearchService.getFoundItems();
-                                if (list.items.length === 0) {
-                                        list.message = 'Nothing Found!';
-                                }
-                        }).catch(function (error) {
-                                console.log("An error occured : ", error.message);
-                        });
+                        if (list.searchTerm.trim() === '') {
+                                list.items = [];
+                                list.message = 'Nothing Found!';
+                        } else {
+                                promise.then(function (response) {
+                                        var dataArray = response.data;
+                                        MenuSearchService.getMatchedMenuItems(dataArray.menu_items, list.searchTerm);
+                                        list.items = MenuSearchService.getFoundItems();
+                                        if (list.items.length === 0) {
+                                                list.message = 'Nothing Found!';
+                                        }
+                                }).catch(function (error) {
+                                        console.log("An error occured : ", error.message);
+                                });
+                        }
+
 
                 };
                 list.removeItem = function (index) {
